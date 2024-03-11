@@ -1,9 +1,8 @@
-const Car = require("../../models/Car");
+const Goods = require("../../models/goods");
 
-const listCars = async (req, res) => {
+const listGoods = async (req, res) => {
   const { brand, price, from, to, page, limit } = req.query;
   const skip = (page - 1) * limit;
-
   const queryObject = {
     $and: [],
   };
@@ -26,11 +25,11 @@ const listCars = async (req, res) => {
     queryObject.$and.push({ mileage: { $lte: to } });
   }
 
-  const totalCount = await Car.countDocuments(queryObject);
+  const totalCount = await Goods.countDocuments(queryObject);
 
-  const cars = await Car.find(queryObject).skip(skip).limit(limit);
+  const goods = await Goods.find(queryObject).skip(skip).limit(limit);
 
-  res.json({ cars, totalCount });
+  res.json({ goods, totalCount });
 };
 
-module.exports = listCars;
+module.exports = listGoods;

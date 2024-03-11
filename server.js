@@ -11,9 +11,7 @@ mongoose
   .connect(uriDb)
   .then(() => {
     app.listen(PORT, () => {
-      console.log(
-        `\n\x1b[32mSuccesful\x1b[0m database connection. Use our API on \x1b[36mhttps://goit-team-03-node.onrender.com/`
-      );
+      console.log(`Server running. Use our API on port: ${PORT}`);
     });
   })
   .catch((err) => {

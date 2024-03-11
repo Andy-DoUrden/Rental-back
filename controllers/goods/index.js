@@ -1,7 +1,7 @@
-const listCars = require("./listCars");
+const listGoods = require("./listGoods");
 const getOne = require("./getOne");
 
 module.exports = {
-  listCars,
+  listGoods,
   getOne,
 };
