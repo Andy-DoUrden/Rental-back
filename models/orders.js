@@ -2,13 +2,12 @@ const { Schema, model } = require("mongoose");
 
 const orderSchema = new Schema(
   {
-    id: Number,
     firstName: String,
     lastName: String,
     email: String,
     number: String,
     adress: String,
-    goods: [{ type: Schema.Types.ObjectId, ref: "goods" }],
+    goods: [{ type: Schema.Types.Array, ref: "goods" }],
     status: String,
     rentStartDate: Date,
     rentEndDate: Date,

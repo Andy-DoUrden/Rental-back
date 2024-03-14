@@ -1,28 +1,14 @@
 const Goods = require("../../models/goods");
 
 const listGoods = async (req, res) => {
-  const { brand, price, from, to, page, limit } = req.query;
+  const { query = "", type, page, limit } = req.query;
   const skip = (page - 1) * limit;
   const queryObject = {
-    $and: [],
+    $and: [{ name: { $regex: query, $options: "i" } }],
   };
 
-  if (brand) {
-    queryObject.$and.push({ make: brand });
-  }
-
-  if (price) {
-    queryObject.$and.push({
-      rentalPrice: { $lte: price },
-    });
-  }
-
-  if (from) {
-    queryObject.$and.push({ mileage: { $gte: from } });
-  }
-
-  if (to) {
-    queryObject.$and.push({ mileage: { $lte: to } });
+  if (type) {
+    queryObject.$and.push({ type: type });
   }
 
   const totalCount = await Goods.countDocuments(queryObject);
